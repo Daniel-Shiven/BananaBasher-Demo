@@ -1,0 +1,188 @@
+Income Table
+
+
+BUILDINGS:
+Abuela:
+abuelaPrice = 50
+abuelaIncome = 1
+
+Farm:
+farmPrice = 750
+farmIncome = 4
+
+Plantation:
+plantPrice = 7200
+plantIncome = 30
+
+Industrial Complex
+complexPrice = 82000
+compelexIncome = 165
+
+
+Banana Pavilion:
+pavPrice = 940,000
+pavIncome = 908
+
+Winston:
+pavPrice = 10,300,000
+pavIncome = 4994
+
+Sun Wukong:
+pavPrice = 113,700,000
+pavIncome = 27467
+
+
+UPGRADES:
+
+Positions:
+|| (10,74),(12,76)
+|| (68,74),(70,76)
+|| (126,74),(128,76)
+|| (184,74),(186,76)
+|| (242,74),(244,76)
+
+NAME: Double Tap #DONE
+Icon: doubletap
+Base Price: 100
+Condition: Base Upgrade (No Condition)
+Benefit: Mouse is 2x Efficient
+
+NAME: Triple Tap #DONE
+Icon: tripletap
+Base Price: 500
+Condition: CPS of 2+
+Benefit: Mouse is 3x Efficient
+
+NAME: Butterfly Clicking #DONE
+Icon: butterfly
+Base Price: 5,000
+Condition: CPS of 30+
+Benefit: Mouse is 2x Efficient
+
+NAME: Jitter Clicking
+Icon:
+Base Price: 10,000
+Condition: CPS of 75+
+Benefit: Mouse gains +0.2 Cookies for each non-cursor object owned
+
+NAME: Bawl Clicking
+Icon:
+Base Price: 100,000
+Condition: CPS of 100+
+Benefit: Multiples gains from Jitter Clicking by 5
+
+NAME: Drag Clicking
+Icon:
+Base Price: 1,000,000
+Condition: CPS of 750+
+Benefit: Multiplies gains from Jitter Clicking by 10
+
+NAME: Macro
+Icon:
+Base Price: 10,000,000
+Condition: CPS of 2500+
+Benefit: Multiplies gains from Jitter Clicking by 20
+
+NAME: Autoclicker
+Icon:
+Base Price: 100,000,000
+Condition: CPS of 5000+
+Benefit: Multiplies gains from Jitter Clicking by 20
+
+
+
+#---Monkey---#
+
+NAME: Chimpanzee #DONE
+Icon: chimp
+Base Price: 500
+Condition: 1 Monkey
+Benefit: Monkeys are 2x efficient
+
+NAME: Harambe #DONE
+Icon: harambe
+Base Price: 2500
+Condition: 5 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Apes
+Icon: ape
+Base Price: 7800
+Condition: 20 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Gorillas
+Icon: gorilla
+Base Price: 45,000
+Condition: 30 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Donkey Kong
+Icon:
+Base Price: 3,800,000
+Condition: 50 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Hanuman
+Icon:
+Base Price: 400,000,000
+Condition: 100 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Monkey Mania
+Icon:
+Base Price: 44,000,000,000
+Condition: 150 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+
+
+#---Farms---#
+
+NAME: Better Hoes
+Icon: betterhoe
+Base Price: 2,300
+Condition: 1 Farm
+Benefit: Farms are 2x Efficient
+
+NAME: Improved Irrigation
+Icon: impirrigation
+Base Price: 12,000
+Condition: 5 Farms
+Benefit: Farms are 2x Efficient
+
+NAME: Genetically Modified Bananas
+Icon: gmobanana
+Base Price: 60,000
+Condition: 25 Farms
+Benefit: Farms are 2x Efficient
+
+NAME: Banana Vines
+Icon: bananavines
+Base Price: 600,000
+Condition: 50 Farms
+Benefit: Farms are 2x Efficient
+
+NAME: Quasar Pesticides
+Icon: quasarpest
+Base Price: 6,000,000
+Condition: 75 Farms
+Benefit: Farms are 2x Efficient
+
+NAME: Banana Pest Control
+Icon: bananafert
+Base Price: 60,000,000
+Condition: 100 Farms
+Benefit: Farms are 2x Efficient
+
+NAME: Advanced Banana Seed Cultivation
+Icon: bananaSeed
+Base Price: 60,000,000
+Condition: 100 Farms
+Benefit: Farms are 2x Efficient
+
+NAME: Banana Precision Technology
+Icon: precisiontech
+Base Price: 5,000,000,000
+Condition: 150 Farms
+Benefit: Farms are 2x Efficient
