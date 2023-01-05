@@ -1,0 +1,49 @@
+MOUSE UPGRADES:
+
+AME: Double Tap #DONE
+Icon: doubletap
+Base Price: 100
+Condition: Base Upgrade (No Condition)
+Benefit: Mouse is 2x Efficient
+
+NAME: Triple Tap #DONE
+Icon: tripletap
+Base Price: 500
+Condition: CPS of 2+
+Benefit: Mouse is 3x Efficient
+
+NAME: Butterfly Clicking #DONE
+Icon: butterfly
+Base Price: 5,000
+Condition: CPS of 30+
+Benefit: Mouse is 2x Efficient
+
+NAME: Jitter Clicking
+Icon:
+Base Price: 10,000
+Condition: CPS of 75+
+Benefit: Mouse gains +0.2 Cookies for each non-cursor object owned
+
+NAME: Bawl Clicking
+Icon:
+Base Price: 100,000
+Condition: CPS of 100+
+Benefit: Multiples gains from Jitter Clicking by 5
+
+NAME: Drag Clicking
+Icon:
+Base Price: 1,000,000
+Condition: CPS of 750+
+Benefit: Multiplies gains from Jitter Clicking by 10
+
+NAME: Macro
+Icon:
+Base Price: 10,000,000
+Condition: CPS of 2500+
+Benefit: Multiplies gains from Jitter Clicking by 20
+
+NAME: Autoclicker
+Icon:
+Base Price: 100,000,000
+Condition: CPS of 5000+
+Benefit: Multiplies gains from Jitter Clicking by 20
