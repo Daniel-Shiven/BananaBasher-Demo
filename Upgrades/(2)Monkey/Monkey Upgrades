@@ -1,0 +1,43 @@
+MONKEY UPGRADES
+
+NAME: Chimpanzee #DONE
+Icon: chimp
+Base Price: 500
+Condition: 1 Monkey
+Benefit: Monkeys are 2x efficient
+
+NAME: Harambe #DONE
+Icon: harambe
+Base Price: 2500
+Condition: 5 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Apes
+Icon: ape
+Base Price: 7800
+Condition: 20 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Gorillas
+Icon: gorilla
+Base Price: 45,000
+Condition: 30 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Donkey Kong
+Icon:
+Base Price: 3,800,000
+Condition: 50 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Hanuman
+Icon:
+Base Price: 400,000,000
+Condition: 100 Monkeys
+Benefit: Monkeys are 2x Efficient
+
+NAME: Monkey Mania
+Icon:
+Base Price: 44,000,000,000
+Condition: 150 Monkeys
+Benefit: Monkeys are 2x Efficient
