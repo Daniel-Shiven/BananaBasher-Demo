@@ -1,0 +1,29 @@
+BUILDINGS:
+
+Abuela:
+abuelaPrice = 50
+abuelaIncome = 1
+
+Farm:
+farmPrice = 750
+farmIncome = 4
+
+Plantation:
+plantPrice = 7200
+plantIncome = 30
+
+Industrial Complex
+complexPrice = 82000
+compelexIncome = 165
+
+Banana Pavilion:
+pavPrice = 940,000
+pavIncome = 908
+
+Winston:
+pavPrice = 10,300,000
+pavIncome = 4994
+
+Sun Wukong:
+pavPrice = 113,700,000
+pavIncome = 27467
