@@ -3,92 +3,154 @@ from tkinter import *
 from tkinter.tix import *
 from tkinter import ttk
 from PIL import Image, ImageTk
-import time
 
-#----Variables----#
 
-#Clicking
+#---------------------------------------------------------------------------------------------------#
+#============================================ VARIABLES ============================================#
+#---------------------------------------------------------------------------------------------------#
+
+#============ SYSTEM/SETUP VARIABLES ============#
+
+#--- Startup ---#
+root = Tk() #Create the window
+root.title("Banana Basher") #Giving the window a title
+root.resizable(False,False) #You can't resize the window
+
+#--- Startup ---#
 bananas = 0 #Banana Count
 bps = 0 #Bananas per Second
 clickMultiplier = 1 #Click Multiplier
 
-#Shop
+
+#============ SHOP MANAGEMENT VARIABLES ============#
+
+#--- Monkeys ---#
 monkeyAmount = 0 #Amount of Monkeys
 monkeyPrice = 50 #Price of Monkey
 monkeyIncome = 0 #Stores the bps for Monkeys
 monkeyMultiplier = 1 #Income Multiplier
 
+#--- Farms ---#
 farmAmount = 0 #Amount of Farm
 farmPrice = 550 #Price of Farm
 farmIncome = 0 #Stores the bps for Farm
 farmMultiplier = 1 #Income Multiplier
 
+#--- Plantations ---#
 plantAmount = 0 #Amount of Plantation
 plantPrice = 7200 #Price of Plantation 
 plantIncome = 0 #Stores the bps for Plantation
 plantMultiplier = 1 #Income Multiplier
 
+#--- Industrial Complexes ---#
 complexAmount = 0 #Amount of Industrial Complexes
 complexPrice = 82000 #Price of Industrial Complexes
 complexIncome = 0 #Stores the bps for Industrial Complexes
 complexMultiplier = 1 #Income Multiplier
 
 
-#Upgrades
-# '' - Not Unlocked
-# False - Unlocked, but not purchased
-# True - Purchased
+#============ UPGRADE SYSTEM VARIABLES ============#
+# 'locked' - Not Unlocked, can be changed through updateUpgrades()
+# 'unlocked' - Unlocked, after a change through updateUpgrades()
+# 'purchased' - Purchased, after a change through activation()
 
-availableUpgrades = 1 #Available upgrades (for formatting)
 
+#------------------------------------------#
+#---------------| CLICKING |---------------#
+#------------------------------------------#
+
+#------- DOUBLE TAP -------#
 doubleTapPrice = 100 #Price of doubleTap
-doubleTapStatus = False #Status of double Tap
+doubleTapStatus = 'locked' #Status of double Tap
+doubleTap = Button(root) #Setup doubleTap Button
+doubleTapBorder = Canvas(root) #Setup the button border
+doubleTapHover = Balloon(root)
+doubleTapImg = ''
+doubleTapDark = ''
+doubleTapLight = ''
+doubleTapMsg = (f"DOUBLE TAP \nCost: 100 Bananas\nClicks are 2x Efficient")
 
+#------ TRIPLE TAP -------#
 tripleTapPrice = 1000 #Price of tripleTap
-tripleTapStatus = '' #Status of tripleTap
+tripleTapStatus = 'locked' #Status of tripleTap
+tripleTap = Button(root) #Setup tripleTap Button
+tripleTapBorder = Canvas(root) #Setup the button border
+tripleTapHover = Balloon(root) #Setup the hover button
+tripleTapMsg = (f"TRIPLE TAP \nCost: 1000 Bananas\nClicks are 3x Efficient") #Setup hover button message
+tripleTapImg = '' #Setup tripleTapImg
+tripleTapDark = '' #Setup tripleTapDark Image
+tripleTapLight = '' #Setup tripleTapLight Image
 
+#------- BUTTERFLY -------#
 butterFlyPrice = 5000 #Price of butterfly clicking
-butterFlyStatus = '' #Status of butterfly clicking
+butterFlyStatus = 'locked' #Status of butterfly clicking
+butterFly = Button(root) #Setup butterFly Button
+butterFlyBorder = Canvas(root) #Setup the button border
+butterFlyHover = Balloon(root)
+butterFlyImg = ''
+butterFlyDark = ''
+butterFlyLight = ''
+butterFlyMsg = (f"BUTTERFLY CLICKING \nCost: 5000 Bananas\nClicks are 2x Efficient")
 
+
+#-----------------------------------------#
+#---------------| MONKEYS |---------------#
+#-----------------------------------------#
+
+#------- CHIMPANZEE -------#
 chimpPrice = 500 #Price of Chimp
-chimpStatus = '' #Status of Chimp
+chimpStatus = 'locked' #Status of Chimp
+chimp = Button(root) #Setup chimp Button
+chimpBorder = Canvas(root) #Setup the button border
+chimpHover = Balloon(root)
+chimpImg = ''
+chimpDark = ''
+chimpLight = ''
+chimpMsg = (f"CHIMPANZEES \nCost: 500 Bananas\nMonkeys are 2x Efficient")
 
+#------- HARAMBE -------#
 harambePrice = 2500 #Price of Harambe
-harambeStatus = '' #Status of Harambe
+harambeStatus = 'locked' #Status of Harambe
+harambe = Button(root) #Setup harambe Button
+harambeBorder = Canvas(root) #Setup the button border
+harambeHover = Balloon(root)
+harambeImg = ''
+harambeDark = ''
+harambeLight = ''
+harambeMsg = (f"HARAMBE \nCost: 2500 Bananas\nMonkeys are 2x Efficient")
 
+
+#-----------------------------------------#
+#---------------| FARMS |---------------#
+#-----------------------------------------#
+
+#---------- betterHoes ----------#
 betterHoePrice = 2300 #Price of BetterHoes
-betterHoeStatus = '' #Status of betterHoes
-
-#----Variables----#
-root = Tk()
-root.title("Banana Basher")
-root.resizable(False,False)
-
-
-
-
-#--------------------------------------------FUNCTIONS---------------------------------------------------#
+betterHoeStatus = 'locked' #Status of betterHoes
+betterHoe = Button(root) #Setup betterHoe Button
+betterHoeBorder = Canvas(root) #Setup the button border
+betterHoeHover = Balloon(root)
+betterHoeImg = ''
+betterHoeDark = ''
+betterHoeLight = ''
+betterHoeMsg = (f"BETTER HOES \nCost: 2300 Bananas\nFarms are 2x Efficient")
 
 
 
-#--------------------Updating the Banana Count--------------------#
+
+#---------------------------------------------------------------------------------------------------#
+#============================================ FUNCTIONS ============================================#
+#---------------------------------------------------------------------------------------------------#
+
+
+#============ Updating the Banana Count ============#
 
 def updateBanana():
 
     global bananas
     global bps
-
-    global monkeyIncome
-    global monkeyMultiplier
-
-    global farmIncome
-    global farmMultiplier
-
-    global plantIncome
-    global complexIncome
-
     
-    bps = (monkeyIncome*monkeyMultiplier)+(farmIncome*farmMultiplier)+plantIncome+complexIncome
+    bps = (monkeyIncome*monkeyMultiplier)+(farmIncome*farmMultiplier)+(plantIncome*plantMultiplier)+(complexIncome*complexMultiplier)
     bpsCounter.config(text=(f"BPS: {round(bps,1)}"),font=('Comic Sans MS',14,'bold'))
 
     bananas = bananas+(bps/10)
@@ -105,7 +167,6 @@ def clickBanana():
 
     bananaDisplay = round(bananas)
     bananaCount.config(text=f"{bananaDisplay} Bananas")
-    print("Banana (Post Click): "+str(bananaDisplay) )
 
 
 
@@ -138,7 +199,7 @@ def purchaseAnShop(amount,price,income,type):
             monkeyPrice = price #Sets Price
             monkeyAmount = amount #Sets amount
             monkeyIncome = income #Sets income
-            print(monkeyIncome)
+            print("Monkey Income:",monkeyIncome)
 
             monkeyLevel.config(text=(f"Monkey: Level {monkeyAmount}")) #For middleWidth
             monkeyPurchase.config(text=(f"Monkey: {monkeyAmount}\n{monkeyPrice} Bananas"))
@@ -247,428 +308,302 @@ def purchaseAnShop(amount,price,income,type):
 
 def rearrangeUpgrades():
     global upgradeBorderColor
-    upgradesAmount = 0
-    borderPosX = -46
+    global mainPosX
+    global mainPosY
+    global borderPosX
+    global borderPosY
+    borderPosX = (9-57)
     borderPosY = 74
-    mainPosX = -44
+    mainPosX = (11-57)
     mainPosY = 76
 
-        
-    #Destroy All Upgrades
+    def deleteMove(main,border,imageID,hover,hoverMsg):
+        main.destroy()
+        border.destroy()
+        global mainPosX
+        global mainPosY
+        global borderPosX
+        global borderPosY
+        if borderPosX >= 233:
+            mainPosX = 11
+            borderPosX = 9
+            mainPosY = mainPosY+57
+            borderPosY = borderPosY+57
+            print(borderPosX,borderPosY)
+        else:
+            mainPosX = mainPosX+57
+            borderPosX = borderPosX+57
+            print(borderPosX,borderPosY)
+
+        border = Canvas(root,bg=upgradeBorderColor,highlightbackground=upgradeBorderColor,highlightthickness=2,bd=0,
+        height=54,width=54)
+        main = Button(root,bg='black',image=imageID,borderwidth=0,activebackground="black")
+        hover.bind_widget(main,balloonmsg=hoverMsg)
+
+        upgrades.create_window(mainPosX,mainPosY,anchor='nw',window=main)
+        upgrades.create_window(borderPosX,borderPosY,anchor='nw',window=border)
+
+        return (main,border)
+
     global doubleTapStatus
-    if doubleTapStatus == False:
+    if doubleTapStatus == 'unlocked':    #Cost: 100
         global doubleTap
         global doubleTapBorder
-        global doubleTapHover
-        doubleTap.destroy()
-        doubleTapBorder.destroy()
+        buffer = deleteMove(doubleTap,doubleTapBorder,doubleTapImg,doubleTapHover,doubleTapMsg)
+        doubleTap = buffer[0]
+        doubleTap.config(command=lambda: activation(doubleTapPrice,doubleTapStatus,2,"doubleTap","click",doubleTap,doubleTapBorder))
+        doubleTapBorder = buffer[1]
 
-    global chimpTapStatus
-    if chimpStatus == False:
+    global chimpStatus
+    if chimpStatus == 'unlocked':    #Cost: 500
         global chimp
         global chimpBorder
-        global chimpHover
-        chimp.destroy()
-        chimpBorder.destroy()
+        buffer = deleteMove(chimp,chimpBorder,chimpImg,chimpHover,chimpMsg)
+        chimp = buffer[0]
+        chimp.config(command=lambda: activation(chimpPrice,chimpStatus,2,"chimp","monkey",chimp,chimpBorder))
+        chimpBorder = buffer[1]
 
     global tripleTapStatus
-    if tripleTapStatus == False:
+    if tripleTapStatus == 'unlocked':    #Cost: 1000
         global tripleTap
         global tripleTapBorder
-        global tripleTapHover
-        tripleTap.destroy()
-        tripleTapBorder.destroy()
+        buffer = deleteMove(tripleTap,tripleTapBorder,tripleTapImg,tripleTapHover,tripleTapMsg)
+        tripleTap = buffer[0]
+        tripleTap.config(command=lambda: activation(tripleTapPrice,tripleTapStatus,3,"tripleTap","click",tripleTap,tripleTapBorder))
+        tripleTapBorder = buffer[1]
 
     global betterHoeStatus
-    if betterHoeStatus == False:
+    if betterHoeStatus == 'unlocked':    #Cost: 2300
         global betterHoe
         global betterHoeBorder
-        global betterHoeHover
-        betterHoe.destroy()
-        betterHoeBorder.destroy()
-        
+        buffer = deleteMove(betterHoe,betterHoeBorder,betterHoeImg,betterHoeHover,betterHoeMsg)
+        betterHoe = buffer[0]
+        betterHoe.config(command=lambda: activation(betterHoePrice,betterHoeStatus,2,"betterHoe","farm",betterHoe,betterHoeBorder))
+        betterHoeBorder = buffer[1]
+
     global harambeStatus
-    if harambeStatus == False:
+    if harambeStatus == 'unlocked':    #Cost: 2500
         global harambe
         global harambeBorder
-        global harambeHover
-        harambe.destroy()
-        harambeBorder.destroy()
-        
+        buffer = deleteMove(harambe,harambeBorder,harambeDark,harambeHover,harambeMsg)
+        harambe = buffer[0]
+        harambe.config(command=lambda: activation(harambePrice,harambeStatus,3,"harambe","monkey",harambe,harambeBorder))
+        harambeBorder = buffer[1]
+
     global butterFlyStatus
-    if butterFlyStatus == False:
+    if butterFlyStatus == 'unlocked':    #Cost: 2500
         global butterFly
         global butterFlyBorder
-        global butterFlyHover
-        butterFly.destroy()
-        butterFlyBorder.destroy()
-        
+        buffer = deleteMove(butterFly,butterFlyBorder,butterFlyDark,butterFlyHover,butterFlyMsg)       
+        butterFly = buffer[0]
+        butterFly.config(command=lambda: activation(butterFlyPrice,butterFlyStatus,2,"butterFly","click",butterFly,butterFlyBorder))
+        butterFlyBorder = buffer[1]
 
-    if doubleTapStatus == False:    #Cost: 100
-        upgradesAmount = upgradesAmount+1
-        mainPosX = mainPosX+56
-        borderPosX = borderPosX+56
 
-        doubleTapBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        doubleTap = Button(root,image=doubleTapImg,bg="black",borderwidth=0,activebackground="black",command=doubleTapActivate)
-        doubleTapHover = Balloon(root)
-        doubleTapHover.bind_widget(doubleTap,balloonmsg=(f"DOUBLE TAP \nCost: {doubleTapPrice} Bananas\nClicks are 2x Efficient"))
 
-        upgrades.create_window(mainPosX,mainPosY,anchor='nw',window=doubleTap)
-        upgrades.create_window(borderPosX,borderPosY,anchor='nw',window=doubleTapBorder)
-    
-    if chimpStatus == False: #Cost: 500
-        upgradesAmount = upgradesAmount+1
-        mainPosX = mainPosX+56
-        borderPosX = borderPosX+56
-
-        chimpBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        chimp = Button(root,image=chimpImg,bg="black",borderwidth=0,activebackground="black",command=chimpActivate)
-        chimpHover = Balloon(root)
-        chimpHover.bind_widget(chimp,balloonmsg=(f"CHIMPANZEE \nCost: {chimpPrice} Bananas\nMonkeys are 2x efficient"))
-        
-        upgrades.create_window(mainPosX,mainPosY,anchor='nw',window=chimp)
-        upgrades.create_window(borderPosX,borderPosY,anchor='nw',window=chimpBorder)
-    
-    if tripleTapStatus == False:    #Cost: 1000
-        upgradesAmount = upgradesAmount+1
-        mainPosX = mainPosX+56
-        borderPosX = borderPosX+56
-
-        tripleTapBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        tripleTap = Button(root,image=tripleTapImg,bg="black",borderwidth=0,activebackground="black",command=tripleTapActivate)
-        tripleTapHover = Balloon(root)
-        tripleTapHover.bind_widget(tripleTap,balloonmsg=(f"TRIPLE TAP \nCost: {tripleTapPrice} Bananas\nClicks are 3x Efficient"))
-        
-        upgrades.create_window(mainPosX,mainPosY,anchor='nw',window=tripleTap)
-        upgrades.create_window(borderPosX,borderPosY,anchor='nw',window=tripleTapBorder)
-    
-    if betterHoeStatus == False:    #Cost: 2300
-        upgradesAmount = upgradesAmount+1
-        mainPosX = mainPosX+56
-        borderPosX = borderPosX+56
-
-        betterHoeBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        betterHoe = Button(root,image=betterHoeImg,bg="black",borderwidth=0,activebackground="black",command=betterHoeActivate)
-        betterHoeHover = Balloon(root)
-        betterHoeHover.bind_widget(betterHoe,balloonmsg=(f"BETTER HOES \nCost: {betterHoePrice} Bananas\nFarms are 2x efficient"))
-        
-        upgrades.create_window(mainPosX,mainPosY,anchor='nw',window=betterHoe)
-        upgrades.create_window(borderPosX,borderPosY,anchor='nw',window=betterHoeBorder)
-    
-    if harambeStatus == False:    #Cost: 2500
-        upgradesAmount = upgradesAmount+1
-        mainPosX = mainPosX+56
-        borderPosX = borderPosX+56
-
-        harambeBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        harambe = Button(root,image=harambeImg,bg="black",borderwidth=0,activebackground="black",command=harambeActivate)
-        harambeHover = Balloon(root)
-        harambeHover.bind_widget(harambe,balloonmsg=(f"HARAMBE \nCost: {harambePrice} Bananas\nMonkeys are 2x efficient"))
-        
-        upgrades.create_window(mainPosX,mainPosY,anchor='nw',window=harambe)
-        upgrades.create_window(borderPosX,borderPosY,anchor='nw',window=harambeBorder)
-    
-    if butterFlyStatus == False:    #Cost: 5000
-        upgradesAmount = upgradesAmount+1
-        mainPosX = mainPosX+56
-        borderPosX = borderPosX+56
-        
-        butterFly.destroy()
-        butterFlyBorder.destroy()
-
-        butterFlyBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        butterFly = Button(root,image=butterFlyImg,bg="black",borderwidth=0,activebackground="black",command=butterFlyActivate)
-        butterFlyHover = Balloon(root)
-        butterFlyHover.bind_widget(butterFly,balloonmsg=(f"BUTTERFLY CLICKING \nCost: {butterFlyPrice} Bananas\nClicks are 2x Efficient"))
-        
-        upgrades.create_window(mainPosX,mainPosY,anchor='nw',window=butterFly)
-        upgrades.create_window(borderPosX,borderPosY,anchor='nw',window=butterFlyBorder)
-        
-
-#DoubleTap
-def doubleTapActivate():
-    print("Begun")
-    global doubleTapPrice
-    global clickMultiplier
-    global availableUpgrades
-    global doubleTapStatus
+#-----UPGRADE ACTIVATION-----#
+def activation(price,status,increase,upgrade,type,main,border):
     global bananas
 
-    if bananas >= doubleTapPrice and doubleTapStatus == False:
-        print("DoubleTap Purchased")
-        bananas = bananas-doubleTapPrice
-        clickMultiplier = clickMultiplier*2
-        doubleTapStatus = True
+    if bananas >= price and status == "unlocked":
+        print(upgrade,"purchase validated")
+        bananas = bananas-price
+        main.destroy()
+        border.destroy()
+
+        if type == 'click':
+            print("Increase:",increase)
+            global clickMultiplier
+            print("Before cps:",clickMultiplier)
+            clickMultiplier = clickMultiplier*increase
+            print("After cps:",clickMultiplier)
+            
+            if upgrade == "doubleTap":
+                global doubleTapStatus
+                doubleTapStatus = 'purchased'
+            
+            if upgrade == "tripleTap":
+                global tripleTapStatus
+                tripleTapStatus = 'purchased'
+            
+            if upgrade == "butterFly":
+                global butterFlyStatus
+                butterFlyStatus = 'purchased'
+
+        if type == 'monkey':
+            global monkeyMultiplier
+            print("Increase:",increase)
+            global monkeyMultiplier
+            print("Before cps:",monkeyMultiplier)
+            monkeyMultiplier = monkeyMultiplier*increase
+            print("After cps:",monkeyMultiplier)
+            
+            if upgrade == "chimp":
+                global chimpStatus
+                chimpStatus = 'purchased'
+            
+            if upgrade == "harambe":
+                global harambeStatus
+                harambeStatus = 'purchased'
+
+        if type == 'farm':
+            global farmMultiplier
+            print("Increase:",increase)
+            global farmMultiplier
+            print("Before cps:",farmMultiplier)
+            farmMultiplier = farmMultiplier*increase
+            print("After cps:",farmMultiplier)
+            
+            if upgrade == "betterHoe":
+                global betterHoeStatus
+                betterHoeStatus = 'purchased'
+
+        if type == 'plant':
+            global plantMultiplier
+            plantMultiplier = plantMultiplier*increase
+
+        if type == 'complex':
+            global complexMultiplier
+            complexMultiplier = complexMultiplier*increase
         
-        availableUpgrades = availableUpgrades-1
-
-        doubleTap.destroy()
-        doubleTapBorder.destroy()
         rearrangeUpgrades()
-
-#TripleTap
-def tripleTapActivate():
-    global tripleTapPrice
-    global clickMultiplier
-    global availableUpgrades
-    global tripleTapStatus
-    global bananas
-
-    if bananas >= tripleTapPrice and tripleTapStatus == False:
-        print("TripleTap Purchased")
-        bananas = bananas-tripleTapPrice
-        clickMultiplier = clickMultiplier*3
-        tripleTapStatus = True
+        print("upgrade rearrange order sent")
         
-        availableUpgrades = availableUpgrades-1
-
-        #Deleting the button and its border
-        tripleTap.destroy()
-        tripleTapBorder.destroy()
-        rearrangeUpgrades()
-
-#ButterFly Clickings
-def butterFlyActivate():
-    global butterFlyPrice
-    global clickMultiplier
-    global availableUpgrades
-    global butterFlyStatus
-    global bananas
-
-    if bananas >= butterFlyPrice and butterFlyStatus == False:
-        print("butterFly Purchased")
-        bananas = bananas-butterFlyPrice
-        clickMultiplier = clickMultiplier*2
-        butterFlyStatus = True
-        
-        availableUpgrades = availableUpgrades-1
-
-        #Deleting the button and its border
-        butterFly.destroy()
-        butterFlyBorder.destroy()
-        rearrangeUpgrades()
-
-#Chimp Upgrade
-def chimpActivate():
-    global chimpPrice
-    global monkeyMultiplier
-    global availableUpgrades
-    global chimpStatus
-    global bananas
-
-    if bananas >= chimpPrice and chimpStatus == False:
-        print("chimp Purchased")
-        bananas = bananas-chimpPrice
-        monkeyMultiplier = monkeyMultiplier*2
-        chimpStatus = True
-        
-        availableUpgrades = availableUpgrades-1
-
-        #Deleting the button and its border
-        chimp.destroy()
-        chimpBorder.destroy()
-        rearrangeUpgrades()
-
-#Harambe Upgrade
-def harambeActivate():
-    global harambePrice
-    global monkeyMultiplier
-    global availableUpgrades
-    global harambeStatus
-    global bananas
-
-    if bananas >= harambePrice and harambeStatus == False:
-        print("harambe Purchased")
-        bananas = bananas-harambePrice
-        monkeyMultiplier = monkeyMultiplier*2
-        harambeStatus = True
-        
-        availableUpgrades = availableUpgrades-1
-
-        #Deleting the button and its border
-        harambe.destroy()
-        harambeBorder.destroy()
-        rearrangeUpgrades()
-
-#Harambe Upgrade
-def betterHoeActivate():
-    global betterHoePrice
-    global farmMultiplier
-    global availableUpgrades
-    global betterHoeStatus
-    global bananas
-
-    if bananas >= betterHoePrice and betterHoeStatus == False:
-        print("betterHoe Purchased")
-        bananas = bananas-betterHoePrice
-        farmMultiplier = farmMultiplier*2
-        betterHoeStatus = True
-        
-        availableUpgrades = availableUpgrades-1
-
-        #Deleting the button and its border
-        betterHoe.destroy()
-        betterHoeBorder.destroy()
-        rearrangeUpgrades()
 
 
 #--------------------UPGRADES (2)--------------------#
-def updateUpgrades():
-    global availableUpgrades
-    global upgradeBorderColor
+def upgradeStatus():
+    global bananas
     global bps
     global monkeyAmount
     global farmAmount
-    borderPosX = 7
-    borderPosY = 74
-    mainPosX = 9
-    mainPosY = 76
+    global option
+    option = False
+
+# 'locked' - Not Unlocked, can be changed through updateUpgrades()
+# 'unlocked' - Unlocked, after a change through updateUpgrades()
+# 'purchased' - Purchased, after a change through activation()
+
+    def unlockUpgrade(requirement,current,status,darkFinal,lightFinal,lightImg,darkImg):
+        if current >= requirement and status == 'locked':
+            global option
+            option = True
+
+            image = Image.open(darkImg)
+            resized_img = image.resize((52,52))
+            darkFinal = ImageTk.PhotoImage(resized_img)
+
+            status = 'unlocked'
+            image = Image.open(lightImg)
+            resized_img = image.resize((52,52))
+            lightFinal = ImageTk.PhotoImage(resized_img)
+
+        return(status,darkFinal,lightFinal)
+
+    def availabileUpgrade(bananas,cost,status,dark,light,main):
+        if bananas >= cost and status == 'unlocked': #If requirement is met
+            img = light
+            main.config(image=light)
+        elif status == 'unlocked':
+            img = dark
+            main.config(image=dark)
+        else:
+            img = ''
+        return(img)
 
 
-    #MAKING CHIMPANZEE BUTTON
-    global chimpStatus
-    if monkeyAmount >= 1 and chimpStatus == '':
-        
-        global chimpImg
-        global chimpBorder
-        global chimp
-        global chimpHover
-        chimpStatus = False
 
-        #Uploads the image
-        image = Image.open('Upgrades/(2)Monkey/chimp.png')
-        resized_img = image.resize((56,56))
-        chimpImg = ImageTk.PhotoImage(resized_img)
+#============= UNLOCKING UPGRADES =============#
 
-        #Creates the button and the hover button
-        chimpBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        chimp = Button(root,image=chimpImg,bg="black",borderwidth=0,activebackground="black",command=chimpActivate)
+    #DoubleTap Upgrade
+    global doubleTapStatus
+    global doubleTapDark
+    global doubleTapLight
+    buffer = unlockUpgrade(0,bps,doubleTapStatus,doubleTapDark,doubleTapLight,'Upgrades/(1)Mouse/doubletap.png','Upgrades/(1)Mouse/darkdoubletap.png')
+    doubleTapStatus = buffer[0]
+    doubleTapDark = buffer[1]
+    doubleTapLight = buffer[2]
 
-        chimpHover = Balloon(root)
-        chimpHover.bind_widget(chimp,balloonmsg=(f"CHIMPANZEE \nCost: {chimpPrice} Bananas\nMonkeys are 2x efficient"))
-
-        upgrades.create_window(borderPosX+(56*availableUpgrades),74,anchor='nw',window=chimpBorder)
-        upgrades.create_window(mainPosX+(56*availableUpgrades),76,anchor='nw',window=chimp)
-
-        availableUpgrades = availableUpgrades+1
+    global doubleTap
+    global doubleTapImg
+    doubleTapImg = availabileUpgrade(bananas,doubleTapPrice,doubleTapStatus,doubleTapDark,doubleTapLight,doubleTap)
 
 
-    #MAKING TRIPLE TAP BUTTON
+    #TripleTap Upgrade
     global tripleTapStatus
-    if bps >= 2 and tripleTapStatus == '':
-        
-        global tripleTapImg
-        global tripleTapBorder
-        global tripleTap
-        global tripleTapHover
-        tripleTapStatus = False
+    global tripleTapDark
+    global tripleTapLight
+    buffer = unlockUpgrade(2,bps,tripleTapStatus,tripleTapDark,tripleTapLight,'Upgrades/(1)Mouse/tripletap.png','Upgrades/(1)Mouse/darktripletap.png')
+    tripleTapStatus = buffer[0]
+    tripleTapDark = buffer[1]
+    tripleTapLight = buffer[2]
 
-        #Uploads the image
-        image = Image.open('Upgrades/(1)Mouse/tripletap.png')
-        resized_img = image.resize((56,56))
-        tripleTapImg = ImageTk.PhotoImage(resized_img)
+    global tripleTap
+    global tripleTapImg
+    tripleTapImg = availabileUpgrade(bananas,tripleTapPrice,tripleTapStatus,tripleTapDark,tripleTapLight,tripleTap)
 
-        #Creates the button and the hover button
-        tripleTapBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        tripleTap = Button(root,image=tripleTapImg,bg="black",borderwidth=0,activebackground="black",command=tripleTapActivate)
-
-        tripleTapHover = Balloon(root)
-        tripleTapHover.bind_widget(tripleTap,balloonmsg=(f"TRIPLE TAP \nCost: {tripleTapPrice} Bananas\n Clicks are 3x efficient"))
-
-        upgrades.create_window(borderPosX+(56*availableUpgrades),74,anchor='nw',window=tripleTapBorder)
-        upgrades.create_window(mainPosX+(56*availableUpgrades),76,anchor='nw',window=tripleTap)
-        
-        availableUpgrades = availableUpgrades+1
-
-
-    #MAKING HARAMBE BUTTON
-    global harambeStatus
-    if monkeyAmount >= 5 and harambeStatus == '':
-        
-        global harambeImg
-        global harambeBorder
-        global harambe
-        global harambeHover
-        harambeStatus = False
-
-        #Uploads the image
-        image = Image.open('Upgrades/(2)Monkey/harambe.png')
-        resized_img = image.resize((56,56))
-        harambeImg = ImageTk.PhotoImage(resized_img)
-
-        #Creates the button and the hover button
-        harambeBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        harambe = Button(root,image=harambeImg,bg="black",borderwidth=0,activebackground="black",command=harambeActivate)
-
-        harambeHover = Balloon(root)
-        harambeHover.bind_widget(harambe,balloonmsg=(f"HARAMBE \nCost: {harambePrice} Bananas\nMonkeys are 2x efficient"))
-
-        upgrades.create_window(borderPosX+(56*availableUpgrades),74,anchor='nw',window=harambeBorder)
-        upgrades.create_window(mainPosX+(56*availableUpgrades),76,anchor='nw',window=harambe)
-        
-        availableUpgrades = availableUpgrades+1
-
-
-    #MAKING HARAMBE BUTTON
-    global betterHoeStatus
-    if farmAmount >= 1 and betterHoeStatus == '':
-        
-        global betterHoeImg
-        global betterHoeBorder
-        global betterHoe
-        global betterHoeHover
-        betterHoeStatus = False
-
-        #Uploads the image
-        image = Image.open('Upgrades/(3)Farm/betterhoe.png')
-        resized_img = image.resize((56,56))
-        betterHoeImg = ImageTk.PhotoImage(resized_img)
-
-        #Creates the button and the hover button
-        betterHoeBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        betterHoe = Button(root,image=betterHoeImg,bg="black",borderwidth=0,activebackground="black",command=betterHoeActivate)
-
-        betterHoeHover = Balloon(root)
-        betterHoeHover.bind_widget(betterHoe,balloonmsg=(f"BETTER HOES \nCost: {betterHoePrice} Bananas\nFarms are 2x efficient"))
-
-        upgrades.create_window(borderPosX+(56*availableUpgrades),74,anchor='nw',window=betterHoeBorder)
-        upgrades.create_window(mainPosX+(56*availableUpgrades),76,anchor='nw',window=betterHoe)
-        
-        availableUpgrades = availableUpgrades+1
-
-
-    #MAKING BUTTERFLY BUTTON
+    #butterFly Upgrade
     global butterFlyStatus
-    if bps >= 30 and butterFlyStatus == '':
-        global butterFlyImg
-        global butterFlyBorder
-        global butterFly
-        global butterFlyHover
-        butterFlyStatus = False
+    global butterFlyDark
+    global butterFlyLight
+    buffer = unlockUpgrade(30,bps,butterFlyStatus,butterFlyDark,butterFlyLight,'Upgrades/(1)Mouse/butterfly.png','Upgrades/(1)Mouse/darkbutterfly.png')
+    butterFlyStatus = buffer[0]
+    butterFlyDark = buffer[1]
+    butterFlyLight = buffer[2]
 
-        print(bps)
-        print(butterFlyStatus)
-        print("begun")
+    global butterFly
+    global butterFlyImg
+    butterFlyImg = availabileUpgrade(bananas,butterFlyPrice,butterFlyStatus,butterFlyDark,butterFlyLight,butterFly)
 
-        #Uploads the image
-        image = Image.open('Upgrades/(1)Mouse/butterfly.png')
-        resized_img = image.resize((56,56))
-        butterFlyImg = ImageTk.PhotoImage(resized_img)
 
-        #Creates the button and the hover button
-        butterFlyBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-        butterFly = Button(root,image=butterFlyImg,bg="black",borderwidth=0,activebackground="black",command=butterFlyActivate)
+#============= MONKEY UPGRADES =============#
 
-        butterFlyHover = Balloon(root)
-        butterFlyHover.bind_widget(butterFly,balloonmsg=(f"BUTTERFLY CLICKING \nCost: {butterFlyPrice} Bananas\nClicks are 2x Efficient"))
+    #Chimp Upgrade
+    global chimpStatus
+    global chimpDark
+    global chimpLight
+    buffer = unlockUpgrade(1,monkeyAmount,chimpStatus,chimpDark,chimpLight,'Upgrades/(2)Monkey/chimp.png','Upgrades/(2)Monkey/darkchimp.png')
+    chimpStatus = buffer[0]
+    chimpDark = buffer[1]
+    chimpLight = buffer[2]
 
-        upgrades.create_window(borderPosX+(56*availableUpgrades),74,anchor='nw',window=butterFlyBorder)
-        upgrades.create_window(mainPosX+(56*availableUpgrades),76,anchor='nw',window=butterFly)
+    global chimp
+    global chimpImg
+    chimpImg = availabileUpgrade(bananas,chimpPrice,chimpStatus,chimpDark,chimpLight,chimp)
 
-        availableUpgrades=availableUpgrades+1
+    #Harambe Upgrade
+    global harambeStatus
+    global harambeDark
+    global harambeLight
+    buffer = unlockUpgrade(5,monkeyAmount,harambeStatus,harambeDark,harambeLight,'Upgrades/(2)Monkey/harambe.png','Upgrades/(2)Monkey/darkharambe.png')
+    harambeStatus = buffer[0]
+    harambeDark = buffer[1]
+    harambeLight = buffer[2]
 
-    root.after(1000,updateUpgrades)
+    global harambe
+    global harambeImg
+    harambeImg = availabileUpgrade(bananas,harambePrice,harambeStatus,harambeDark,harambeLight,harambe)
+
+
+#============= FARM UPGRADES =============#
+
+    #betterHoe Upgrade
+    global betterHoeStatus
+    global betterHoeDark
+    global betterHoeLight
+    buffer = unlockUpgrade(1,farmAmount,betterHoeStatus,betterHoeDark,betterHoeLight,'Upgrades/(3)Farm/betterhoe.png','Upgrades/(3)Farm/darkbetterhoe.png')
+    betterHoeStatus = buffer[0]
+    betterHoeDark = buffer[1]
+    betterHoeLight = buffer[2]
+
+    global betterHoe
+    global betterHoeImg
+    betterHoeImg = availabileUpgrade(bananas,betterHoePrice,betterHoeStatus,betterHoeDark,betterHoeLight,betterHoe)
+
+    if option == True:
+        rearrangeUpgrades()
+
+    root.after(1000,upgradeStatus)
         
 
 
@@ -813,7 +748,7 @@ root.grid_columnconfigure(3, weight=1)
 
 #-----Create Shop Canvas-----#
 
-rightWidth = 300
+rightWidth = 299
 rightSide.grid(row=0,column=4)
 
 
@@ -916,6 +851,8 @@ rightSide.create_window(0,245,window=complexPurchase,anchor='w') #Add Industrial
 #-----CREATE UPGRADE CANVAS-----#
 upgradesColor = "#4e4f87" #Sets the background color for the upgrades Canvas
 
+#rightWidth = 300
+
 upgradeHeight = 275
 
 upgrades = Canvas(root,width=rightWidth,height=upgradeHeight,bg=upgradesColor) #Creates the upgrades Canvas 
@@ -936,15 +873,14 @@ upgradeBorderColor = "#a14c3f"
 upgrades.create_line(0, 4, rightWidth+2, 4, fill='#964B00', width=7) #Top Line
 upgrades.create_line(0, 72, rightWidth+2, 72, fill='#964B00', width=2)# Middle Line
 
-upgrades.create_line(
-5, 0,
+upgrades.create_line(5, 0, 
 5, upgradeHeight,
-fill='#964B00', width=7) #Left Line
+fill='#964B00', width=6) #Left Line
 
 upgrades.create_line(
-rightWidth-2, 0,
-rightWidth-2, upgradeHeight,
-fill='#964B00', width=7) #Right Line
+298, 0,
+298, upgradeHeight,
+fill='#964B00', width=5) #Right Line
 
 upgrades.create_line(
 0, upgradeHeight,
@@ -953,27 +889,8 @@ fill='#964B00', width=7) #Bottom Line
 
 
 
-#-----CREATE DOUBLE TAP-----#
-
-#Uploads the image
-image = Image.open('Upgrades/(1)Mouse/doubletap.png')
-resized_img = image.resize((56,56))
-doubleTapImg = ImageTk.PhotoImage(resized_img)
-
-#Creates the button and the hover button
-doubleTapBorder = Canvas(root, bg=upgradeBorderColor,highlightbackground = upgradeBorderColor, highlightthickness = 2, bd=0,height=58,width=58)
-doubleTap = Button(root,image=doubleTapImg,bg="black",borderwidth=0,activebackground="black",command=doubleTapActivate)
-
-doubleTapHover = Balloon(root)
-doubleTapHover.bind_widget(doubleTap,balloonmsg=(f"DOUBLE TAP \nCost: {doubleTapPrice} Bananas\nClicks are 2x Efficient"))
-
-upgrades.create_window(10,74,anchor='nw',window=doubleTapBorder)
-upgrades.create_window(12,76,anchor='nw',window=doubleTap)
-
-
-
 #----------Update banana Count + Tkinter operation loop---------#
 
 updateBanana()
-updateUpgrades()
+upgradeStatus()
 root.mainloop()
