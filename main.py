@@ -20,31 +20,33 @@ root.resizable(False,False) #You can't resize the window
 bananas = 0 #Banana Count
 bps = 0 #Bananas per Second
 clickMultiplier = 1 #Click Multiplier
+tapMultiplier = 0 #Tap Multiplier
 
 
 #============ SHOP MANAGEMENT VARIABLES ============#
+buildings = 0
 
 #--- Monkeys ---#
 monkeyAmount = 0 #Amount of Monkeys
-monkeyPrice = 50 #Price of Monkey
+monkeyPrice = 25 #Price of Monkey
 monkeyIncome = 0 #Stores the bps for Monkeys
 monkeyMultiplier = 1 #Income Multiplier
 
 #--- Farms ---#
 farmAmount = 0 #Amount of Farm
-farmPrice = 550 #Price of Farm
+farmPrice = 250 #Price of Farm
 farmIncome = 0 #Stores the bps for Farm
 farmMultiplier = 1 #Income Multiplier
 
 #--- Plantations ---#
 plantAmount = 0 #Amount of Plantation
-plantPrice = 7200 #Price of Plantation 
+plantPrice = 2800 #Price of Plantation 
 plantIncome = 0 #Stores the bps for Plantation
 plantMultiplier = 1 #Income Multiplier
 
 #--- Industrial Complexes ---#
 complexAmount = 0 #Amount of Industrial Complexes
-complexPrice = 82000 #Price of Industrial Complexes
+complexPrice = 32000 #Price of Industrial Complexes
 complexIncome = 0 #Stores the bps for Industrial Complexes
 complexMultiplier = 1 #Income Multiplier
 
@@ -55,9 +57,9 @@ complexMultiplier = 1 #Income Multiplier
 # 'purchased' - Purchased, after a change through activation()
 
 
-#------------------------------------------#
-#---------------| CLICKING |---------------#
-#------------------------------------------#
+#----------------------------------------------------------#
+#-----------------------| CLICKING |-----------------------#
+#----------------------------------------------------------#
 
 #------- DOUBLE TAP -------#
 doubleTapPrice = 100 #Price of doubleTap
@@ -76,7 +78,7 @@ tripleTapStatus = 'locked' #Status of tripleTap
 tripleTap = Button(root) #Setup tripleTap Button
 tripleTapBorder = Canvas(root) #Setup the button border
 tripleTapHover = Balloon(root) #Setup the hover button
-tripleTapMsg = (f"TRIPLE TAP \nCost: 1000 Bananas\nClicks are 3x Efficient") #Setup hover button message
+tripleTapMsg = (f"TRIPLE TAP \nCost: 1000 Bananas\nClicks are 2x Efficient") #Setup hover button message
 tripleTapImg = '' #Setup tripleTapImg
 tripleTapDark = '' #Setup tripleTapDark Image
 tripleTapLight = '' #Setup tripleTapLight Image
@@ -92,10 +94,65 @@ butterFlyDark = ''
 butterFlyLight = ''
 butterFlyMsg = (f"BUTTERFLY CLICKING \nCost: 5000 Bananas\nClicks are 2x Efficient")
 
+#------- JITTER CLICKING -------#
+jitterPrice = 10000 #Price of jitter clicking
+jitterStatus = 'locked' #Status of jitter clicking
+jitter = Button(root) #Setup jitter Button
+jitterBorder = Canvas(root) #Setup the button border
+jitterHover = Balloon(root) #Setup hover button
+jitterMsg = (f"JITTER CLICKING \nCost: {jitterPrice} Bananas\nMouse gains +0.2 Cookies for each non-cursor object owned") #Setup hover message
+jitterImg = '' #Setup jitter Img
+jitterDark = '' #Setup dark jitter Image
+jitterLight = '' #Setup light jitter Image
 
-#-----------------------------------------#
-#---------------| MONKEYS |---------------#
-#-----------------------------------------#
+#------- BAWL CLICKING -------#
+bawlPrice = 100000 #Price of bawl clicking
+bawlStatus = 'locked' #Status of bawl clicking
+bawl = Button(root) #Setup bawl Button
+bawlBorder = Canvas(root) #Setup the button border
+bawlHover = Balloon(root) #Setup hover button
+bawlMsg = (f"BAWL CLICKING \nCost: {bawlPrice} Bananas\nGains from Jitter Clicking are multiplied by 5") #Setup hover message
+bawlImg = '' #Setup bawl Img
+bawlDark = '' #Setup dark bawl Image
+bawlLight = '' #Setup light bawl Image
+
+#------- DRAG CLICKING -------#
+dragPrice = 1000000 #Price of drag clicking
+dragStatus = 'locked' #Status of drag clicking
+drag = Button(root) #Setup drag Button
+dragBorder = Canvas(root) #Setup the button border
+dragHover = Balloon(root) #Setup hover button
+dragMsg = (f"DRAG CLICKING \nCost: {dragPrice} Bananas\nGains from Jitter Clicking are multiplied by 10") #Setup hover message
+dragImg = '' #Setup drag Img
+dragDark = '' #Setup dark drag Image
+dragLight = '' #Setup light drag Image
+
+#------- MACRO -------#
+macroPrice = 10000000 #Price of macro clicking
+macroStatus = 'locked' #Status of macro clicking
+macro = Button(root) #Setup macro Button
+macroBorder = Canvas(root) #Setup the button border
+macroHover = Balloon(root) #Setup hover button
+macroMsg = (f"MACRO \nCost: {macroPrice} Bananas\nGains from Jitter Clicking are multiplied by 20") #Setup hover message
+macroImg = '' #Setup macro Img
+macroDark = '' #Setup dark macro Image
+macroLight = '' #Setup light macro Image
+
+#------- AUTOCLICKER -------#
+autoclickerPrice = 100000000 #Price of autoclicker clicking
+autoclickerStatus = 'locked' #Status of autoclicker clicking
+autoclicker = Button(root) #Setup autoclicker Button
+autoclickerBorder = Canvas(root) #Setup the button border
+autoclickerHover = Balloon(root) #Setup hover button
+autoclickerMsg = (f"AUTOCLICKER \nCost: {autoclickerPrice} Bananas\nGains from Jitter Clicking are multiplied by 20") #Setup hover message
+autoclickerImg = '' #Setup autoclicker Img
+autoclickerDark = '' #Setup dark autoclicker Image
+autoclickerLight = '' #Setup light autoclicker Image
+
+
+#---------------------------------------------------------#
+#-----------------------| MONKEYS |-----------------------#
+#---------------------------------------------------------#
 
 #------- CHIMPANZEE -------#
 chimpPrice = 500 #Price of Chimp
@@ -106,7 +163,7 @@ chimpHover = Balloon(root)
 chimpImg = ''
 chimpDark = ''
 chimpLight = ''
-chimpMsg = (f"CHIMPANZEES \nCost: 500 Bananas\nMonkeys are 2x Efficient")
+chimpMsg = (f"CHIMPANZEES \nCost: {chimpPrice} Bananas\nMonkeys are 2x Efficient")
 
 #------- HARAMBE -------#
 harambePrice = 2500 #Price of Harambe
@@ -119,10 +176,76 @@ harambeDark = ''
 harambeLight = ''
 harambeMsg = (f"HARAMBE \nCost: 2500 Bananas\nMonkeys are 2x Efficient")
 
+#------- Apes -------#
+apePrice = 7800 #Price of Ape
+apeStatus = 'locked' #Status of ape
+ape = Button(root) #Setup ape Button
+apeBorder = Canvas(root) #Setup the button border
+apeHover = Balloon(root)
+apeImg = ''
+apeDark = ''
+apeLight = ''
+apeMsg = (f"Apes \nCost: {apePrice} Bananas\nMonkeys are 2x Efficient")
 
-#-----------------------------------------#
-#---------------| FARMS |---------------#
-#-----------------------------------------#
+#------- Gorillas -------#
+gorillaPrice = 45000 #Price of gorilla
+gorillaStatus = 'locked' #Status of gorilla
+gorilla = Button(root) #Setup gorilla Button
+gorillaBorder = Canvas(root) #Setup the button border
+gorillaHover = Balloon(root)
+gorillaImg = ''
+gorillaDark = ''
+gorillaLight = ''
+gorillaMsg = (f"Gorillas \nCost: {gorillaPrice} Bananas\nMonkeys are 2x Efficient")
+
+#------- Donkey Kong -------#
+donkeyPrice = 550000 #Price of donkey
+donkeyStatus = 'locked' #Status of donkey
+donkey = Button(root) #Setup donkey Button
+donkeyBorder = Canvas(root) #Setup the button border
+donkeyHover = Balloon(root)
+donkeyImg = ''
+donkeyDark = ''
+donkeyLight = ''
+donkeyMsg = (f"Donkey Kong \nCost: {donkeyPrice} Bananas\nMonkeys are 2x Efficient")
+
+#------- King Kong -------#
+kingPrice = 3800000 #Price of king kong (3,800,000)
+kingStatus = 'locked' #Status of king kong
+king = Button(root) #Setup king kong Button
+kingBorder = Canvas(root) #Setup the button border
+kingHover = Balloon(root)
+kingImg = ''
+kingDark = ''
+kingLight = ''
+kingMsg = (f"King Kong \nCost: {kingPrice} Bananas\nMonkeys are 2x Efficient")
+
+#------- Hanuman -------#
+hanumanPrice = 40000000 #Price of hanuman (40,000,000)
+hanumanStatus = 'locked' #Status of hanuman
+hanuman = Button(root) #Setup hanuman Button
+hanumanBorder = Canvas(root) #Setup the button border
+hanumanHover = Balloon(root)
+hanumanImg = ''
+hanumanDark = ''
+hanumanLight = ''
+hanumanMsg = (f"Hanuman \nCost: {hanumanPrice} Bananas\nMonkeys are 2x Efficient")
+
+#------- Monkey Mania -------#
+maniaPrice = 4000000000 #Price of monkey mania (4,000,000,000)
+maniaStatus = 'locked' #Status of monkey mania
+mania = Button(root) #Setup mania Button
+maniaBorder = Canvas(root) #Setup the button border
+maniaHover = Balloon(root)
+maniaImg = ''
+maniaDark = ''
+maniaLight = ''
+maniaMsg = (f"Monkey Mania \nCost: {maniaPrice} Bananas\nMonkeys are 2x Efficient")
+
+
+#-------------------------------------------------------#
+#-----------------------| FARMS |-----------------------#
+#-------------------------------------------------------#
 
 #---------- betterHoes ----------#
 betterHoePrice = 2300 #Price of BetterHoes
@@ -135,6 +258,83 @@ betterHoeDark = ''
 betterHoeLight = ''
 betterHoeMsg = (f"BETTER HOES \nCost: 2300 Bananas\nFarms are 2x Efficient")
 
+#---------- irrigations ----------#
+irrigationPrice = 12000 #Price of irrigations (12k)
+irrigationStatus = 'locked' #Status of irrigations
+irrigation = Button(root) #Setup irrigation Button
+irrigationBorder = Canvas(root) #Setup the button border
+irrigationHover = Balloon(root)
+irrigationImg = '' #Overall Image
+irrigationDark = '' #Dark version
+irrigationLight = '' #Light Version
+irrigationMsg = (f"Irrigation \nCost: {irrigationPrice} Bananas\nFarms are 2x Efficient")
+
+#---------- gmos ----------#
+gmoPrice = 60000 #Price of gmos (60k)
+gmoStatus = 'locked' #Status of gmos
+gmo = Button(root) #Setup gmo Button
+gmoBorder = Canvas(root) #Setup the button border
+gmoHover = Balloon(root)
+gmoImg = '' #Overall Image
+gmoDark = '' #Dark version
+gmoLight = '' #Light Version
+gmoMsg = (f"GMO Bananas \nCost: {gmoPrice} Bananas\nFarms are 2x Efficient")
+
+#---------- vines ----------#
+vinesPrice = 600000 #Price of viness (600k)
+vinesStatus = 'locked' #Status of viness
+vines = Button(root) #Setup vines Button
+vinesBorder = Canvas(root) #Setup the button border
+vinesHover = Balloon(root)
+vinesImg = '' #Overall Image
+vinesDark = '' #Dark version
+vinesLight = '' #Light Version
+vinesMsg = (f"Vines \nCost: {vinesPrice} Bananas\nFarms are 2x Efficient")
+
+#---------- qasars ----------#
+qasarPrice = 6000000 #Price of qasars (6 million)
+qasarStatus = 'locked' #Status of qasars
+qasar = Button(root) #Setup qasar Button
+qasarBorder = Canvas(root) #Setup the button border
+qasarHover = Balloon(root)
+qasarImg = '' #Overall Image
+qasarDark = '' #Dark version
+qasarLight = '' #Light Version
+qasarMsg = (f"Qasar Pesticides \nCost: {qasarPrice} Bananas\nFarms are 2x Efficient")
+
+#---------- seeds ----------#
+seedsPrice = 60000000 #Price of seedss (60 million)
+seedsStatus = 'locked' #Status of seedss
+seeds = Button(root) #Setup seeds Button
+seedsBorder = Canvas(root) #Setup the button border
+seedsHover = Balloon(root)
+seedsImg = '' #Overall Image
+seedsDark = '' #Dark version
+seedsLight = '' #Light Version
+seedsMsg = (f"Banana Seeds+ \nCost: {seedsPrice} Bananas\nFarms are 2x Efficient")
+
+#---------- pests ----------#
+pestPrice = 600000000 #Price of pests (600 million)
+pestStatus = 'locked' #Status of pests
+pest = Button(root) #Setup pest Button
+pestBorder = Canvas(root) #Setup the button border
+pestHover = Balloon(root)
+pestImg = '' #Overall Image
+pestDark = '' #Dark version
+pestLight = '' #Light Version
+pestMsg = (f"Pest Control \nCost: {pestPrice} Bananas\nFarms are 2x Efficient")
+
+#---------- precisions ----------#
+precisionPrice = 6000000000 #Price of precisions (6 Billion)
+precisionStatus = 'locked' #Status of precisions
+precision = Button(root) #Setup precision Button
+precisionBorder = Canvas(root) #Setup the button border
+precisionHover = Balloon(root)
+precisionImg = '' #Overall Image
+precisionDark = '' #Dark version
+precisionLight = '' #Light Version
+precisionMsg = (f"Precision Technology \nCost: {precisionPrice} Bananas\nFarms are 2x Efficient")
+
 
 
 
@@ -142,8 +342,9 @@ betterHoeMsg = (f"BETTER HOES \nCost: 2300 Bananas\nFarms are 2x Efficient")
 #============================================ FUNCTIONS ============================================#
 #---------------------------------------------------------------------------------------------------#
 
-
+#---------------------------------------------------#
 #============ Updating the Banana Count ============#
+#---------------------------------------------------#
 
 def updateBanana():
 
@@ -163,7 +364,8 @@ def updateBanana():
 #Clicking the Banana
 def clickBanana():
     global bananas
-    bananas = bananas+(1*clickMultiplier)
+    global buildings
+    bananas = bananas+(clickMultiplier+(buildings*tapMultiplier))
 
     bananaDisplay = round(bananas)
     bananaCount.config(text=f"{bananaDisplay} Bananas")
@@ -172,14 +374,18 @@ def clickBanana():
 
 
 
-#--------------------SHOP--------------------#
 
-#Purchase an Item
+#--------------------------------------------#
+#=================== SHOP ===================#
+#--------------------------------------------#
+
 def purchaseAnShop(amount,price,income,type):
     global bananas
     
     if bananas >= price:
         bananas = bananas-price
+        global buildings
+        buildings = buildings + 1
 
         price = round(price*1.15) #Increase the price
         amount = amount+1 #Increaes the amount
@@ -303,8 +509,12 @@ def purchaseAnShop(amount,price,income,type):
     
 
 
-#--------------------UPGRADES--------------------#
 
+
+
+#----------------------------------------------------------#
+#-----------------------| UPGRADES |-----------------------#
+#----------------------------------------------------------#
 
 def rearrangeUpgrades():
     global upgradeBorderColor
@@ -355,7 +565,7 @@ def rearrangeUpgrades():
         doubleTapBorder = buffer[1]
 
     global chimpStatus
-    if chimpStatus == 'unlocked':    #Cost: 500
+    if chimpStatus == 'unlocked':    #Cost: 300
         global chimp
         global chimpBorder
         buffer = deleteMove(chimp,chimpBorder,chimpImg,chimpHover,chimpMsg)
@@ -369,7 +579,7 @@ def rearrangeUpgrades():
         global tripleTapBorder
         buffer = deleteMove(tripleTap,tripleTapBorder,tripleTapImg,tripleTapHover,tripleTapMsg)
         tripleTap = buffer[0]
-        tripleTap.config(command=lambda: activation(tripleTapPrice,tripleTapStatus,3,"tripleTap","click",tripleTap,tripleTapBorder))
+        tripleTap.config(command=lambda: activation(tripleTapPrice,tripleTapStatus,2,"tripleTap","click",tripleTap,tripleTapBorder))
         tripleTapBorder = buffer[1]
 
     global betterHoeStatus
@@ -387,17 +597,161 @@ def rearrangeUpgrades():
         global harambeBorder
         buffer = deleteMove(harambe,harambeBorder,harambeDark,harambeHover,harambeMsg)
         harambe = buffer[0]
-        harambe.config(command=lambda: activation(harambePrice,harambeStatus,3,"harambe","monkey",harambe,harambeBorder))
+        harambe.config(command=lambda: activation(harambePrice,harambeStatus,2,"harambe","monkey",harambe,harambeBorder))
         harambeBorder = buffer[1]
 
     global butterFlyStatus
-    if butterFlyStatus == 'unlocked':    #Cost: 2500
+    if butterFlyStatus == 'unlocked':    #Cost: 5000
         global butterFly
         global butterFlyBorder
         buffer = deleteMove(butterFly,butterFlyBorder,butterFlyDark,butterFlyHover,butterFlyMsg)       
         butterFly = buffer[0]
         butterFly.config(command=lambda: activation(butterFlyPrice,butterFlyStatus,2,"butterFly","click",butterFly,butterFlyBorder))
         butterFlyBorder = buffer[1]
+
+    global apeStatus
+    if apeStatus == 'unlocked':    #Cost: 7800
+        global ape
+        global apeBorder
+        buffer = deleteMove(ape,apeBorder,apeDark,apeHover,apeMsg)
+        ape = buffer[0]
+        ape.config(command=lambda: activation(apePrice,apeStatus,2,"ape","monkey",ape,apeBorder))
+        apeBorder = buffer[1]
+
+    global jitterStatus
+    if jitterStatus == 'unlocked':    #Cost: 10,000
+        global jitter
+        global jitterBorder
+        buffer = deleteMove(jitter,jitterBorder,jitterDark,jitterHover,jitterMsg)       
+        jitter = buffer[0]
+        jitter.config(command=lambda: activation(jitterPrice,jitterStatus,1,"jitter","tap",jitter,jitterBorder))
+        jitterBorder = buffer[1]
+
+    global irrigationStatus
+    if irrigationStatus == 'unlocked':    #Cost: 12,000
+        global irrigation
+        global irrigationBorder
+        buffer = deleteMove(irrigation,irrigationBorder,irrigationDark,irrigationHover,irrigationMsg)
+        irrigation = buffer[0]
+        irrigation.config(command=lambda: activation(irrigationPrice,irrigationStatus,2,"irrigation","farm",irrigation,irrigationBorder))
+        irrigationBorder = buffer[1]
+
+    global gorillaStatus
+    if gorillaStatus == 'unlocked':    #Cost: 45,000
+        global gorilla
+        global gorillaBorder
+        buffer = deleteMove(gorilla,gorillaBorder,gorillaDark,gorillaHover,gorillaMsg)
+        gorilla = buffer[0]
+        gorilla.config(command=lambda: activation(gorillaPrice,gorillaStatus,2,"gorilla","monkey",gorilla,gorillaBorder))
+        gorillaBorder = buffer[1]
+
+    global gmoStatus
+    if gmoStatus == 'unlocked':    #Cost: 60,000
+        global gmo
+        global gmoBorder
+        buffer = deleteMove(gmo,gmoBorder,gmoDark,gmoHover,gmoMsg)
+        gmo = buffer[0]
+        gmo.config(command=lambda: activation(gmoPrice,gmoStatus,2,"gmo","farm",gmo,gmoBorder))
+        gmoBorder = buffer[1]
+
+    global bawlStatus
+    if bawlStatus == 'unlocked':    #Cost: 100,000
+        global bawl
+        global bawlBorder
+        buffer = deleteMove(bawl,bawlBorder,bawlDark,bawlHover,bawlMsg)       
+        bawl = buffer[0]
+        bawl.config(command=lambda: activation(bawlPrice,bawlStatus,5,"bawl","tap",bawl,bawlBorder))
+        bawlBorder = buffer[1]
+
+    global donkeyStatus
+    if donkeyStatus == 'unlocked':    #Cost: 550,000
+        global donkey
+        global donkeyBorder
+        buffer = deleteMove(donkey,donkeyBorder,donkeyDark,donkeyHover,donkeyMsg)
+        donkey = buffer[0]
+        donkey.config(command=lambda: activation(donkeyPrice,donkeyStatus,2,"donkey","monkey",donkey,donkeyBorder))
+        donkeyBorder = buffer[1]
+
+    global vinesStatus
+    if vinesStatus == 'unlocked':    #Cost: 600,000
+        global vines
+        global vinesBorder
+        buffer = deleteMove(vines,vinesBorder,vinesDark,vinesHover,vinesMsg)
+        vines = buffer[0]
+        vines.config(command=lambda: activation(vinesPrice,vinesStatus,2,"vines","farm",vines,vinesBorder))
+        vinesBorder = buffer[1]
+
+    global dragStatus
+    if dragStatus == 'unlocked':    #Cost: 1,000,000
+        global drag
+        global dragBorder
+        buffer = deleteMove(drag,dragBorder,dragDark,dragHover,dragMsg)       
+        drag = buffer[0]
+        drag.config(command=lambda: activation(dragPrice,dragStatus,10,"drag","tap",drag,dragBorder))
+        dragBorder = buffer[1]
+
+    global kingStatus
+    if kingStatus == 'unlocked':    #Cost: 3,800,000
+        global king
+        global kingBorder
+        buffer = deleteMove(king,kingBorder,kingDark,kingHover,kingMsg)
+        king = buffer[0]
+        king.config(command=lambda: activation(kingPrice,kingStatus,2,"king","farm",king,kingBorder))
+        kingBorder = buffer[1]
+
+    global qasarStatus
+    if qasarStatus == 'unlocked':    #Cost: 6,000,000
+        global qasar
+        global qasarBorder
+        buffer = deleteMove(qasar,qasarBorder,qasarDark,qasarHover,qasarMsg)
+        qasar = buffer[0]
+        qasar.config(command=lambda: activation(qasarPrice,qasarStatus,2,"qasar","farm",qasar,qasarBorder))
+        qasarBorder = buffer[1]
+
+    global pestStatus
+    if pestStatus == 'unlocked':    #Cost: 60,000,000
+        global pest
+        global pestBorder
+        buffer = deleteMove(pest,pestBorder,pestDark,pestHover,pestMsg)
+        pest = buffer[0]
+        pest.config(command=lambda: activation(pestPrice,pestStatus,2,"pest","farm",pest,pestBorder))
+        pestBorder = buffer[1]
+
+    global macroStatus
+    if macroStatus == 'unlocked':    #Cost: 10,000,000
+        global macro
+        global macroBorder
+        buffer = deleteMove(macro,macroBorder,macroDark,macroHover,macroMsg)       
+        macro = buffer[0]
+        macro.config(command=lambda: activation(macroPrice,macroStatus,20,"macro","tap",macro,macroBorder))
+        macroBorder = buffer[1]
+
+    global hanumanStatus
+    if hanumanStatus == 'unlocked':    #Cost: 40,000,000
+        global hanuman
+        global hanumanBorder
+        buffer = deleteMove(hanuman,hanumanBorder,hanumanDark,hanumanHover,hanumanMsg)
+        hanuman = buffer[0]
+        hanuman.config(command=lambda: activation(hanumanPrice,hanumanStatus,2,"hanuman","monkey",hanuman,hanumanBorder))
+        hanumanBorder = buffer[1]
+
+    global autoclickerStatus
+    if autoclickerStatus == 'unlocked':    #Cost: 100,000,000
+        global autoclicker
+        global autoclickerBorder
+        buffer = deleteMove(autoclicker,autoclickerBorder,autoclickerDark,autoclickerHover,autoclickerMsg)       
+        autoclicker = buffer[0]
+        autoclicker.config(command=lambda: activation(autoclickerPrice,autoclickerStatus,20,"autoclicker","tap",autoclicker,autoclickerBorder))
+        autoclickerBorder = buffer[1]
+
+    global maniaStatus
+    if maniaStatus == 'unlocked':    #Cost: 4,000,000,000
+        global mania
+        global maniaBorder
+        buffer = deleteMove(mania,maniaBorder,maniaDark,maniaHover,maniaMsg)
+        mania = buffer[0]
+        mania.config(command=lambda: activation(maniaPrice,maniaStatus,2,"mania","monkey",mania,maniaBorder))
+        maniaBorder = buffer[1]
 
 
 
@@ -430,6 +784,33 @@ def activation(price,status,increase,upgrade,type,main,border):
                 global butterFlyStatus
                 butterFlyStatus = 'purchased'
 
+        if type == 'tap':
+            global tapMultiplier
+            if tapMultiplier == 0:
+                tapMultiplier = .2
+            tapMultiplier = tapMultiplier*increase
+            
+            if upgrade == "jitter":
+                global jitterStatus
+                jitterStatus = 'purchased'
+            
+            if upgrade == "bawl":
+                global bawlStatus
+                bawlStatus = 'purchased'
+            
+            if upgrade == "drag":
+                global dragStatus
+                dragStatus = 'purchased'
+            
+            if upgrade == "macro":
+                global macroStatus
+                macroStatus = 'purchased'
+            
+            if upgrade == "autoclicker":
+                global autoclickerStatus
+                autoclickerStatus = 'purchased'
+
+
         if type == 'monkey':
             global monkeyMultiplier
             print("Increase:",increase)
@@ -445,6 +826,30 @@ def activation(price,status,increase,upgrade,type,main,border):
             if upgrade == "harambe":
                 global harambeStatus
                 harambeStatus = 'purchased'
+            
+            if upgrade == "ape":
+                global apeStatus
+                apeStatus = 'purchased'
+            
+            if upgrade == "gorilla":
+                global gorillaStatus
+                gorillaStatus = 'purchased'
+            
+            if upgrade == "donkey":
+                global donkeyStatus
+                donkeyStatus = 'purchased'
+            
+            if upgrade == "king":
+                global kingStatus
+                kingStatus = 'purchased'
+            
+            if upgrade == "hanuman":
+                global hanumanStatus
+                hanumanStatus = 'purchased'
+            
+            if upgrade == "mania":
+                global maniaStatus
+                maniaStatus = 'purchased'
 
         if type == 'farm':
             global farmMultiplier
@@ -533,7 +938,7 @@ def upgradeStatus():
     global tripleTapStatus
     global tripleTapDark
     global tripleTapLight
-    buffer = unlockUpgrade(2,bps,tripleTapStatus,tripleTapDark,tripleTapLight,'Upgrades/(1)Mouse/tripletap.png','Upgrades/(1)Mouse/darktripletap.png')
+    buffer = unlockUpgrade(5,bps,tripleTapStatus,tripleTapDark,tripleTapLight,'Upgrades/(1)Mouse/tripletap.png','Upgrades/(1)Mouse/darktripletap.png')
     tripleTapStatus = buffer[0]
     tripleTapDark = buffer[1]
     tripleTapLight = buffer[2]
@@ -554,6 +959,71 @@ def upgradeStatus():
     global butterFly
     global butterFlyImg
     butterFlyImg = availabileUpgrade(bananas,butterFlyPrice,butterFlyStatus,butterFlyDark,butterFlyLight,butterFly)
+
+    #jitter Upgrade
+    global jitterStatus
+    global jitterDark
+    global jitterLight
+    buffer = unlockUpgrade(50,bps,jitterStatus,jitterDark,jitterLight,'Upgrades/(1)Mouse/jitter.png','Upgrades/(1)Mouse/darkjitter.png')
+    jitterStatus = buffer[0]
+    jitterDark = buffer[1]
+    jitterLight = buffer[2]
+
+    global jitter
+    global jitterImg
+    jitterImg = availabileUpgrade(bananas,jitterPrice,jitterStatus,jitterDark,jitterLight,jitter)
+
+    #bawl Upgrade
+    global bawlStatus
+    global bawlDark
+    global bawlLight
+    buffer = unlockUpgrade(200,bps,bawlStatus,bawlDark,bawlLight,'Upgrades/(1)Mouse/bawl.png','Upgrades/(1)Mouse/darkbawl.png')
+    bawlStatus = buffer[0]
+    bawlDark = buffer[1]
+    bawlLight = buffer[2]
+
+    global bawl
+    global bawlImg
+    bawlImg = availabileUpgrade(bananas,bawlPrice,bawlStatus,bawlDark,bawlLight,bawl)
+
+    #drag Upgrade
+    global dragStatus
+    global dragDark
+    global dragLight
+    buffer = unlockUpgrade(750,bps,dragStatus,dragDark,dragLight,'Upgrades/(1)Mouse/drag.png','Upgrades/(1)Mouse/darkdrag.png')
+    dragStatus = buffer[0]
+    dragDark = buffer[1]
+    dragLight = buffer[2]
+
+    global drag
+    global dragImg
+    dragImg = availabileUpgrade(bananas,dragPrice,dragStatus,dragDark,dragLight,drag)
+
+    #macro Upgrade
+    global macroStatus
+    global macroDark
+    global macroLight
+    buffer = unlockUpgrade(2500,bps,macroStatus,macroDark,macroLight,'Upgrades/(1)Mouse/macro.png','Upgrades/(1)Mouse/darkmacro.png')
+    macroStatus = buffer[0]
+    macroDark = buffer[1]
+    macroLight = buffer[2]
+
+    global macro
+    global macroImg
+    macroImg = availabileUpgrade(bananas,macroPrice,macroStatus,macroDark,macroLight,macro)
+
+    #autoclicker Upgrade
+    global autoclickerStatus
+    global autoclickerDark
+    global autoclickerLight
+    buffer = unlockUpgrade(5000,bps,autoclickerStatus,autoclickerDark,autoclickerLight,'Upgrades/(1)Mouse/autoclicker.png','Upgrades/(1)Mouse/darkautoclicker.png')
+    autoclickerStatus = buffer[0]
+    autoclickerDark = buffer[1]
+    autoclickerLight = buffer[2]
+
+    global autoclicker
+    global autoclickerImg
+    autoclickerImg = availabileUpgrade(bananas,autoclickerPrice,autoclickerStatus,autoclickerDark,autoclickerLight,autoclicker)
 
 
 #============= MONKEY UPGRADES =============#
@@ -583,6 +1053,84 @@ def upgradeStatus():
     global harambe
     global harambeImg
     harambeImg = availabileUpgrade(bananas,harambePrice,harambeStatus,harambeDark,harambeLight,harambe)
+
+    #Harambe Upgrade
+    global apeStatus
+    global apeDark
+    global apeLight
+    buffer = unlockUpgrade(10,monkeyAmount,apeStatus,apeDark,apeLight,'Upgrades/(2)Monkey/ape.png','Upgrades/(2)Monkey/darkape.png')
+    apeStatus = buffer[0]
+    apeDark = buffer[1]
+    apeLight = buffer[2]
+
+    global ape
+    global apeImg
+    apeImg = availabileUpgrade(bananas,apePrice,apeStatus,apeDark,apeLight,ape)
+
+    #Harambe Upgrade
+    global gorillaStatus
+    global gorillaDark
+    global gorillaLight
+    buffer = unlockUpgrade(20,monkeyAmount,gorillaStatus,gorillaDark,gorillaLight,'Upgrades/(2)Monkey/gorilla.png','Upgrades/(2)Monkey/darkgorilla.png')
+    gorillaStatus = buffer[0]
+    gorillaDark = buffer[1]
+    gorillaLight = buffer[2]
+
+    global gorilla
+    global gorillaImg
+    gorillaImg = availabileUpgrade(bananas,gorillaPrice,gorillaStatus,gorillaDark,gorillaLight,gorilla)
+
+    #Harambe Upgrade
+    global donkeyStatus
+    global donkeyDark
+    global donkeyLight
+    buffer = unlockUpgrade(30,monkeyAmount,donkeyStatus,donkeyDark,donkeyLight,'Upgrades/(2)Monkey/donkey.png','Upgrades/(2)Monkey/darkdonkey.png')
+    donkeyStatus = buffer[0]
+    donkeyDark = buffer[1]
+    donkeyLight = buffer[2]
+
+    global donkey
+    global donkeyImg
+    donkeyImg = availabileUpgrade(bananas,donkeyPrice,donkeyStatus,donkeyDark,donkeyLight,donkey)
+
+    #Harambe Upgrade
+    global kingStatus
+    global kingDark
+    global kingLight
+    buffer = unlockUpgrade(50,monkeyAmount,kingStatus,kingDark,kingLight,'Upgrades/(2)Monkey/king.png','Upgrades/(2)Monkey/darkking.png')
+    kingStatus = buffer[0]
+    kingDark = buffer[1]
+    kingLight = buffer[2]
+
+    global king
+    global kingImg
+    kingImg = availabileUpgrade(bananas,kingPrice,kingStatus,kingDark,kingLight,king)
+
+    #Harambe Upgrade
+    global hanumanStatus
+    global hanumanDark
+    global hanumanLight
+    buffer = unlockUpgrade(100,monkeyAmount,hanumanStatus,hanumanDark,hanumanLight,'Upgrades/(2)Monkey/hanuman.png','Upgrades/(2)Monkey/darkhanuman.png')
+    hanumanStatus = buffer[0]
+    hanumanDark = buffer[1]
+    hanumanLight = buffer[2]
+
+    global hanuman
+    global hanumanImg
+    hanumanImg = availabileUpgrade(bananas,hanumanPrice,hanumanStatus,hanumanDark,hanumanLight,hanuman)
+
+    #Harambe Upgrade
+    global maniaStatus
+    global maniaDark
+    global maniaLight
+    buffer = unlockUpgrade(150,monkeyAmount,maniaStatus,maniaDark,maniaLight,'Upgrades/(2)Monkey/mania.png','Upgrades/(2)Monkey/darkmania.png')
+    maniaStatus = buffer[0]
+    maniaDark = buffer[1]
+    maniaLight = buffer[2]
+
+    global mania
+    global maniaImg
+    maniaImg = availabileUpgrade(bananas,maniaPrice,maniaStatus,maniaDark,maniaLight,mania)
 
 
 #============= FARM UPGRADES =============#
