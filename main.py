@@ -708,15 +708,6 @@ def rearrangeUpgrades():
         qasar.config(command=lambda: activation(qasarPrice,qasarStatus,2,"qasar","farm",qasar,qasarBorder))
         qasarBorder = buffer[1]
 
-    global pestStatus
-    if pestStatus == 'unlocked':    #Cost: 60,000,000
-        global pest
-        global pestBorder
-        buffer = deleteMove(pest,pestBorder,pestDark,pestHover,pestMsg)
-        pest = buffer[0]
-        pest.config(command=lambda: activation(pestPrice,pestStatus,2,"pest","farm",pest,pestBorder))
-        pestBorder = buffer[1]
-
     global macroStatus
     if macroStatus == 'unlocked':    #Cost: 10,000,000
         global macro
@@ -735,6 +726,15 @@ def rearrangeUpgrades():
         hanuman.config(command=lambda: activation(hanumanPrice,hanumanStatus,2,"hanuman","monkey",hanuman,hanumanBorder))
         hanumanBorder = buffer[1]
 
+    global pestStatus
+    if pestStatus == 'unlocked':    #Cost: 60,000,000
+        global pest
+        global pestBorder
+        buffer = deleteMove(pest,pestBorder,pestDark,pestHover,pestMsg)
+        pest = buffer[0]
+        pest.config(command=lambda: activation(pestPrice,pestStatus,2,"pest","farm",pest,pestBorder))
+        pestBorder = buffer[1]
+
     global autoclickerStatus
     if autoclickerStatus == 'unlocked':    #Cost: 100,000,000
         global autoclicker
@@ -744,6 +744,15 @@ def rearrangeUpgrades():
         autoclicker.config(command=lambda: activation(autoclickerPrice,autoclickerStatus,20,"autoclicker","tap",autoclicker,autoclickerBorder))
         autoclickerBorder = buffer[1]
 
+    global seedsStatus
+    if seedsStatus == 'unlocked':    #Cost: 600,000,000
+        global seeds
+        global seedsBorder
+        buffer = deleteMove(seeds,seedsBorder,seedsDark,seedsHover,seedsMsg)
+        seeds = buffer[0]
+        seeds.config(command=lambda: activation(seedsPrice,seedsStatus,2,"seeds","farm",seeds,seedsBorder))
+        seedsBorder = buffer[1]
+
     global maniaStatus
     if maniaStatus == 'unlocked':    #Cost: 4,000,000,000
         global mania
@@ -752,6 +761,15 @@ def rearrangeUpgrades():
         mania = buffer[0]
         mania.config(command=lambda: activation(maniaPrice,maniaStatus,2,"mania","monkey",mania,maniaBorder))
         maniaBorder = buffer[1]
+
+    global precisionStatus
+    if precisionStatus == 'unlocked':    #Cost: 6,000,000,000
+        global precision
+        global precisionBorder
+        buffer = deleteMove(precision,precisionBorder,precisionDark,precisionHover,precisionMsg)
+        precision = buffer[0]
+        precision.config(command=lambda: activation(precisionPrice,precisionStatus,2,"precision","farm",precision,precisionBorder))
+        precisionBorder = buffer[1]
 
 
 
@@ -862,6 +880,34 @@ def activation(price,status,increase,upgrade,type,main,border):
             if upgrade == "betterHoe":
                 global betterHoeStatus
                 betterHoeStatus = 'purchased'
+            
+            if upgrade == "irrigation":
+                global irrigationStatus
+                irrigationStatus = 'purchased'
+            
+            if upgrade == "gmo":
+                global gmoStatus
+                gmoStatus = 'purchased'
+            
+            if upgrade == "vines":
+                global vinesStatus
+                vinesStatus = 'purchased'
+            
+            if upgrade == "qasar":
+                global qasarStatus
+                qasarStatus = 'purchased'
+            
+            if upgrade == "pest":
+                global pestStatus
+                pestStatus = 'purchased'
+            
+            if upgrade == "seeds":
+                global seedsStatus
+                seedsStatus = 'purchased'
+            
+            if upgrade == "precision":
+                global precisionStatus
+                precisionStatus = 'purchased'
 
         if type == 'plant':
             global plantMultiplier
@@ -1147,6 +1193,97 @@ def upgradeStatus():
     global betterHoe
     global betterHoeImg
     betterHoeImg = availabileUpgrade(bananas,betterHoePrice,betterHoeStatus,betterHoeDark,betterHoeLight,betterHoe)
+
+    #irrigation Upgrade
+    global irrigationStatus
+    global irrigationDark
+    global irrigationLight
+    buffer = unlockUpgrade(5,farmAmount,irrigationStatus,irrigationDark,irrigationLight,'Upgrades/(3)Farm/irrigation.png','Upgrades/(3)Farm/darkirrigation.png')
+    irrigationStatus = buffer[0]
+    irrigationDark = buffer[1]
+    irrigationLight = buffer[2]
+
+    global irrigation
+    global irrigationImg
+    irrigationImg = availabileUpgrade(bananas,irrigationPrice,irrigationStatus,irrigationDark,irrigationLight,irrigation)
+
+    #gmo Upgrade
+    global gmoStatus
+    global gmoDark
+    global gmoLight
+    buffer = unlockUpgrade(10,farmAmount,gmoStatus,gmoDark,gmoLight,'Upgrades/(3)Farm/gmo.png','Upgrades/(3)Farm/darkgmo.png')
+    gmoStatus = buffer[0]
+    gmoDark = buffer[1]
+    gmoLight = buffer[2]
+
+    global gmo
+    global gmoImg
+    gmoImg = availabileUpgrade(bananas,gmoPrice,gmoStatus,gmoDark,gmoLight,gmo)
+
+    #vines Upgrade
+    global vinesStatus
+    global vinesDark
+    global vinesLight
+    buffer = unlockUpgrade(20,farmAmount,vinesStatus,vinesDark,vinesLight,'Upgrades/(3)Farm/vines.png','Upgrades/(3)Farm/darkvines.png')
+    vinesStatus = buffer[0]
+    vinesDark = buffer[1]
+    vinesLight = buffer[2]
+
+    global vines
+    global vinesImg
+    vinesImg = availabileUpgrade(bananas,vinesPrice,vinesStatus,vinesDark,vinesLight,vines)
+
+    #qasar Upgrade
+    global qasarStatus
+    global qasarDark
+    global qasarLight
+    buffer = unlockUpgrade(50,farmAmount,qasarStatus,qasarDark,qasarLight,'Upgrades/(3)Farm/qasar.png','Upgrades/(3)Farm/darkqasar.png')
+    qasarStatus = buffer[0]
+    qasarDark = buffer[1]
+    qasarLight = buffer[2]
+
+    global qasar
+    global qasarImg
+    qasarImg = availabileUpgrade(bananas,qasarPrice,qasarStatus,qasarDark,qasarLight,qasar)
+
+    #pest Upgrade
+    global pestStatus
+    global pestDark
+    global pestLight
+    buffer = unlockUpgrade(75,farmAmount,pestStatus,pestDark,pestLight,'Upgrades/(3)Farm/pest.png','Upgrades/(3)Farm/darkpest.png')
+    pestStatus = buffer[0]
+    pestDark = buffer[1]
+    pestLight = buffer[2]
+
+    global pest
+    global pestImg
+    pestImg = availabileUpgrade(bananas,pestPrice,pestStatus,pestDark,pestLight,pest)
+
+    #seeds Upgrade
+    global seedsStatus
+    global seedsDark
+    global seedsLight
+    buffer = unlockUpgrade(100,farmAmount,seedsStatus,seedsDark,seedsLight,'Upgrades/(3)Farm/seeds.png','Upgrades/(3)Farm/darkseeds.png')
+    seedsStatus = buffer[0]
+    seedsDark = buffer[1]
+    seedsLight = buffer[2]
+
+    global seeds
+    global seedsImg
+    seedsImg = availabileUpgrade(bananas,seedsPrice,seedsStatus,seedsDark,seedsLight,seeds)
+
+    #precision Upgrade
+    global precisionStatus
+    global precisionDark
+    global precisionLight
+    buffer = unlockUpgrade(150,farmAmount,precisionStatus,precisionDark,precisionLight,'Upgrades/(3)Farm/precision.png','Upgrades/(3)Farm/darkprecision.png')
+    precisionStatus = buffer[0]
+    precisionDark = buffer[1]
+    precisionLight = buffer[2]
+
+    global precision
+    global precisionImg
+    precisionImg = availabileUpgrade(bananas,precisionPrice,precisionStatus,precisionDark,precisionLight,precision)
 
     if option == True:
         rearrangeUpgrades()
