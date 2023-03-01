@@ -5,3 +5,7 @@ Import Packets
 Create window (non resizable, title, icon)
 
 Create shop variables!
+
+Create upgrade variables
+Turn their photo directories into Tk images.
+
