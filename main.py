@@ -115,7 +115,6 @@ pygame.display.set_icon(bigBanana)
 #============ LEFT SECTION ============#
 left_width = 300
 left_height = 600
-left = pygame.surface((left_width,left_height))
 
 background = pygame.image.load('background.jpg') #Background
 background = pygame.transform.scale(background, (left_width,left_height))
@@ -228,7 +227,7 @@ while running:
     bar_y = round(middleBox.bar_y)
     middle_y = -1*(bar_y*middleBox.multi)
 
-    if dragging or scrolling:
+    if middleBox.bar_y == scrn_y-middleBox.bar_height:
         middleBox.bar_y += 1 #Adjust for rounding
 
     
@@ -240,14 +239,14 @@ while running:
 
     #============ LEFT SECTION ============#
 
-    left.blit(background,(0,0)) #background
-    left.blit(banana,(150-(banana.get_width()/2),300-(banana.get_height()/2))) #banana
+    scrn.blit(background,(0,0)) #background
+    scrn.blit(banana,(150-(banana.get_width()/2),300-(banana.get_height()/2))) #banana
 
-    left.blit(countBg,(0,150-(countBg.get_height()/2)))
-    left.blit(bananaCount, ([150-(bananaCount.get_width()/2), 150-(bananaCount.get_height()/2)]))
+    scrn.blit(countBg,(0,150-(countBg.get_height()/2)))
+    scrn.blit(bananaCount, ([150-(bananaCount.get_width()/2), 150-(bananaCount.get_height()/2)]))
     
-    left.blit(bpsBg,(0,95-(bpsBg.get_height()/2)))
-    left.blit(bpsCount, ([150-(bpsCount.get_width()/2), 95-(bpsCount.get_height()/2)]))
+    scrn.blit(bpsBg,(0,95-(bpsBg.get_height()/2)))
+    scrn.blit(bpsCount, ([150-(bpsCount.get_width()/2), 95-(bpsCount.get_height()/2)]))
 
 
     scrn.blit(sep1,(300,0)) #Separator1
