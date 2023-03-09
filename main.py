@@ -56,23 +56,27 @@ class generator:
     def __init__ (self,address,i,typeDisplay):
 
         self.colorBg = pygame.Surface((100,150)) #Load color
-        self.colorBg.fill(GENCOLOR) #Set Color
-        middle.blit(self.colorBg,(0,i*175))
 
         self.imageBg = pygame.image.load(address) #Load Image
         self.imageBg = pygame.transform.scale(self.imageBg,(300,150))
         middle.blit(self.imageBg,(100,i*175))
 
-        comic3 = pygame.font.SysFont("comicsansms", 45, True)
-        amount = comic3.render((f"0"), True, (0,0,0))
-        middle.blit(amount,(50-(amount.get_width()/2),(50-(amount.get_height()/2))+(i*175)))
+        self.comic3 = pygame.font.SysFont("comicsansms", 45, True)
+        self.quantity = self.comic3.render((f"{self.amount}"), True, BLACK)
 
-        #T
-        comic4 = pygame.font.SysFont("comicsansms", 18, True)
-        type = comic4.render((f"{typeDisplay}"), True, (0,0,0))
-        middle.blit(type,(50-(type.get_width()/2),(110-(type.get_height()/2))+(i*175)))
+        self.comic4 = pygame.font.SysFont("comicsansms", 18, True)
+        self.type = self.comic4.render((f"{typeDisplay}"), True, (0,0,0))
+        
 
         middle.blit(sep2,(0,150+(i*175))) #Blit Separator
+    
+    def update(self,i):
+        self.colorBg.fill(GENCOLOR)
+        self.colorBg.blit(self.type,(50-(self.type.get_width()/2),(110-(self.type.get_height()/2))))
+        
+        self.quantity = self.comic3.render((f"{self.amount}"), True, BLACK)
+        self.colorBg.blit(self.quantity,(50-(self.quantity.get_width()/2),(50-(self.quantity.get_height()/2))))
+        middle.blit(self.colorBg,(0,i*175))
 
 class scrollbox():
     
@@ -120,6 +124,17 @@ background = pygame.image.load('background.jpg') #Background
 background = pygame.transform.scale(background, (left_width,left_height))
 
 banana = pygame.image.load('banana1.png') #Banana
+button_mask = pygame.mask.from_surface(banana)
+
+button_sprite = pygame.sprite.Sprite()
+button_sprite.image = banana
+button_sprite.rect = banana.get_rect()
+
+
+
+
+
+
 
 sep1 = pygame.image.load('Separators/separator1.jpg') #Separator1
 sep1 = pygame.transform.scale(sep1, (50,left_height))
@@ -133,10 +148,6 @@ bpsBg.fill(WHITE)
 # Set up the font
 comic1 = pygame.font.SysFont("comicsansms", 30, True)
 comic2 = pygame.font.SysFont("comicsansms", 18, True)
-
-# Set up the text
-bananaCount = comic1.render((f"{bananas} Bananas"), True, (0,0,0))
-bpsCount = comic2.render((f"BPS: {bps}"), True, (0,0,0))
 
 
 
@@ -156,6 +167,9 @@ for i in range(len(gen)):
 
     gen[i][0].price = gen[i][1] #Set up base price
     gen[i][0].base_income = gen[i][2] #Set up base income
+
+    gen[i][0].update(i)
+
 
 
 
@@ -239,11 +253,16 @@ while running:
 
     #============ LEFT SECTION ============#
 
+    # Update quantites in the left section
+    bananaCount = comic1.render((f"{bananas} Bananas"), True, (0,0,0))
+    bpsCount = comic2.render((f"BPS: {bps}"), True, (0,0,0))
+
     scrn.blit(background,(0,0)) #background
     scrn.blit(banana,(150-(banana.get_width()/2),300-(banana.get_height()/2))) #banana
 
     scrn.blit(countBg,(0,150-(countBg.get_height()/2)))
-    scrn.blit(bananaCount, ([150-(bananaCount.get_width()/2), 150-(bananaCount.get_height()/2)]))
+    countBg.fill(WHITE)
+    countBg.blit(bananaCount, (150-(bananaCount.get_width()/2), 0))
     
     scrn.blit(bpsBg,(0,95-(bpsBg.get_height()/2)))
     scrn.blit(bpsCount, ([150-(bpsCount.get_width()/2), 95-(bpsCount.get_height()/2)]))
@@ -253,6 +272,11 @@ while running:
 
 
     #============ MIDDLE SECTION ============#
+
+    # Update quantities in the generator section
+    for i in range(len(gen)): 
+        gen[i][0].update(i)
+
     middleBox.box_surface.fill(GREY)
     scrn.blit(middleBox.box_surface,(750,0)) #middleBox
     scrn.blit(middleBox.bar_surface,(750,middleBox.bar_y)) #middleBar
