@@ -1,6 +1,8 @@
 # BananaBasher
 Cookie clicker but with banana and other changes that I desire!
 
+git clone https://github.com/Daniel-Shiven/BananaBasher
+
 Tools that I use:
 
 Dall-E (For Art: https://labs.openai.com/e/svxvCCCStv3eDqKhfbPJajTV/xw7WCe5HnO2puRDjtbHPJT97)
